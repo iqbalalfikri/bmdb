@@ -14,7 +14,9 @@ class GenreController extends Controller
      */
     public function index()
     {
-        //
+        $genres = Genre::all();
+
+        return view('manage_genre')->with(compact('genres'));
     }
 
     /**

@@ -5,7 +5,7 @@
 @section('content')
 
 
-<div class="container w-50">
+<div class="container w-50 m-vh-80">
     <form class="border rounded mt-5 p-4 bg-light" method="post" action="/">
         @csrf
         <h3 class="text-center font-weight-bold">Edit Profile</h3>

@@ -47,17 +47,13 @@ Route::get('/saved-movie', function () {
     return view('saved_movie');
 });
 
-Route::get('/manage-movie', function () {
-    return view('manage_movie');
-});
+Route::get('/manage-movie', 'MovieController@index');
 
 Route::get('/manage-user', function () {
     return view('manage_user');
 });
 
-Route::get('/manage-genre', function () {
-    return view('manage_genre');
-});
+Route::get('/manage-genre', 'GenreController@index');
 
 Route::get('/add-user', function () {
     return view('add_user');
@@ -94,3 +90,7 @@ Route::get('/edit-genre', function () {
 Route::get('/delete-genre', function () {
     return view('delete_genre');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

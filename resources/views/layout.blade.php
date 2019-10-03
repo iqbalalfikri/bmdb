@@ -66,7 +66,7 @@
 
     @yield('content')
 
-    <footer class="page-footer font-small blue bg-dark fixed-bottom">
+    <footer class="page-footer font-small blue bg-dark">
 
         <div class="footer-copyright text-center py-3 text-white">© 2019 Copyright
             <a href="/" class="text-warning font-weight-bold"> BMDb.com</a>

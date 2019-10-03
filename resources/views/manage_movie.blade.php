@@ -5,7 +5,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container m-vh-80">
     <div class="mt-5"></div>
     <h2 class="font-weight-bold">Manage Movie</h2>
     <a href="/add-movie" class="btn btn-primary mt-2 mb-2">Add Movie</a>
@@ -24,23 +24,25 @@
             </tr>
         </thead>
         <tbody>
+            @foreach($movies as $movie)
             <tr>
-                <th scope="row" style="text-align: center;">1</th>
-                <td>Admin</td>
-                <td>Comedy</td>
+                <th scope="row" style="text-align: center;">{{$loop->iteration}}</th>
+                <td>{{$movie->posted_by}}</td>
+                <td>{{$movie->genres->name}}</td>
                 <td style="width:100px">
-                    <a href="" class="font-weight-bold text-primary">Once Upon a Time ... in Hollywood</a>
+                    <a href="" class="font-weight-bold text-primary">{{$movie->title}}</a>
                 </td>
                 <td>
-                    <img src="https://images.roughtrade.com/product/images/files/000/176/734/original/Once_Upon_A_Time_In_Hollywood_packshot.jpg?1564144784" alt="" class="manage-pic rounded">
+                    <img src="{{$movie->picture}}" alt="" class="manage-pic rounded">
                 </td>
-                <td style="width:400px">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci cupiditate architecto dolorum quae beatae, animi officiis alias, aut natus itaque, nesciunt modi. Repellat voluptates dolore ratione! Placeat, consequatur recusandae. Ipsum.</td>
-                <td>8.4</td>
+                <td style="width:400px">{{$movie->description}}</td>
+                <td>{{$movie->rating}}</td>
                 <td>
                     <a href="/edit-movie" class="btn btn-warning">Edit</a>
                     <a href="/delete-movie" class="btn btn-danger">Remove</a>
                 </td>
             </tr>
+            @endforeach
         </tbody>
     </table>
 </div>

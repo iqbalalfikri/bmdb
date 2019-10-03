@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container m-vh-80">
     <div class="media border rounded mt-5 p-4">
         <img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" class="mr-3 rounded profile-pic" alt="...">
         <div class="media-body">

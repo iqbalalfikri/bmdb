@@ -6,7 +6,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container m-vh-80">
 
     <div class="border rounded mt-5">
         <div class="card bg-transparent m-4">

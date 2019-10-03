@@ -6,7 +6,7 @@
 @section('content')
 
 
-<div class="container">
+<div class="container m-vh-80">
     <div class="mt-5"></div>
     <h2 class="font-weight-bold">Manage User</h2>
     <a href="/add-user" class="btn btn-primary mt-2 mb-2">Add User</a>

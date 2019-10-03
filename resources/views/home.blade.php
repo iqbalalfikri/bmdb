@@ -5,10 +5,10 @@
 @section('content')
 
 
-<div class="container">
-    <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2 my-5 bg-transparent col-4" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+<div class="container m-vh-80">
+    <form class="form-inline mt-5">
+        <input class="form-control mr-sm-2 my-2 bg-transparent col-4" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
 
 
