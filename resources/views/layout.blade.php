@@ -24,6 +24,8 @@
                 <li class="nav-item">
                     <a class="nav-link text-white font-weight-lighter" href="/">Home</a>
                 </li>
+
+                @if(Auth::check())
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Manage
@@ -40,25 +42,28 @@
                 <li class="nav-item">
                     <a class="nav-link text-white font-weight-lighter" href="inbox">Inbox</a>
                 </li>
-
+                @endif
             </ul>
             <ul class="navbar-nav mr-3 ml-3">
 
                 <li class="nav-item my-2 my-lg-0 mr-3">
                     <div class="nav-link text-white" id="time"></div>
                 </li>
+                @if(!Auth::check())
                 <li class="nav-item my-2 my-lg-0">
                     <a href="/login" class="nav-link text-white">Login</a>
                 </li>
                 <li class="nav-item my-2 my-lg-0">
                     <a href="/register" class="nav-link text-white">Register</a>
                 </li>
+                @else
                 <li class="nav-item my-2 my-lg-0">
                     <a href="/profile" class="nav-link text-white">Profile</a>
                 </li>
                 <li class="nav-item my-2 my-lg-0">
                     <a href="/logout" class="nav-link text-white">Logout</a>
                 </li>
+                @endif
             </ul>
 
         </div>

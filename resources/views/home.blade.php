@@ -11,26 +11,27 @@
         <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
 
-
+    @foreach($movies as $movie)
     <div class="card mb-3 bg-transparent">
         <div class=" row no-gutters">
             <div class="col-md-4">
-                <img class="picture m-2" src="https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_.jpg" class="card-img" alt="...">
+                <img class="picture m-2" src="{{$movie->picture}}" class="card-img" alt="...">
             </div>
             <div class="col-md-8">
                 <div class="card-body">
                     <div class="card-title">
-                        <a href="" class="font-weight-bold title text-primary">asd</a>
-                        <button class="btn btn-warning float-right">Save</button>
+                        <a href="" class="font-weight-bold title text-primary">{{$movie->title}}</a>
+                        <button class="btn btn-outline-dark float-right">Save</button>
                     </div>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <p class="card-text text-muted">{{$movie->genres->name}}</p>
+                    <p class="card-text">{{$movie->description}}</p>
                     <img src="https://m.media-amazon.com/images/G/01/imdb/images/plugins/imdb_star_22x21-2889147855._CB483525256_.png" alt="">
-                    <span class="font-weight-bold rating">1.1</span>
+                    <span class="font-weight-bold rating">{{$movie->rating}}</span>
                 </div>
             </div>
         </div>
     </div>
+    @endforeach
 
 </div>
 

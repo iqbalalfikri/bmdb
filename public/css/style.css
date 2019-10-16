@@ -4,7 +4,7 @@
 
 .picture {
 	width: 350px;
-	height: 200px;
+	height: 250px;
 }
 
 .title {
@@ -36,4 +36,8 @@
 
 .m-vh-80 {
 	min-height: 80vh;
+}
+.btn.btn-outline-dark:hover {
+	color: Black;
+	background: yellow;
 }

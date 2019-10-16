@@ -49,9 +49,7 @@ Route::get('/saved-movie', function () {
 
 Route::get('/manage-movie', 'MovieController@index');
 
-Route::get('/manage-user', function () {
-    return view('manage_user');
-});
+Route::get('/manage-user', 'UserController@index');
 
 Route::get('/manage-genre', 'GenreController@index');
 
@@ -93,4 +91,4 @@ Route::get('/delete-genre', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');

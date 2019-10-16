@@ -26,30 +26,32 @@
             </tr>
         </thead>
         <tbody>
+            @foreach($users as $user)
             <tr>
-                <th scope="row">1</th>
-                <td>Admin</td>
-                <td>admin@admin.com</td>
+                <th scope="row">{{$loop->iteration}}</th>
+                <td>{{$user->name}}</td>
+                <td>{{$user->email}}</td>
                 <td>
-                    Admin
+                    {{$user->roles->name}}
                 </td>
                 <td>
-                    Gender
+                    {{$user->gender}}
                 </td>
                 <td>
-                    Jl. Kebon Jeruk Raya
+                    {{$user->address}}
                 </td>
                 <td>
-                    <img src="https://icon-library.net/images/default-profile-icon/default-profile-icon-24.jpg" alt="" class="manage-pic rounded">
+                    <img src="{{$user->picture}}" alt="" class="manage-pic rounded">
                 </td>
                 <td>
-                    1991-05-27
+                    {{$user->dob}}
                 </td>
                 <td>
                     <a href="/edit-user" class="btn btn-warning">Edit</a>
                     <a href="/delete-user" class="btn btn-danger">Remove</a>
                 </td>
             </tr>
+            @endforeach
         </tbody>
     </table>
 </div>
