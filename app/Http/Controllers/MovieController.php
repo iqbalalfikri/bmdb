@@ -46,9 +46,11 @@ class MovieController extends Controller
      * @param  \App\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function show(Movie $movie)
+    public function show($id)
     {
-        //
+        $movie = Movie::where('id', $id)->firstOrFail();
+
+        return view('detail')->with(compact('movie'));
     }
 
     /**
