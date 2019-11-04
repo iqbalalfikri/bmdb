@@ -41,7 +41,7 @@
                     {{$user->address}}
                 </td>
                 <td>
-                    <img src="{{$user->picture}}" alt="" class="manage-pic rounded">
+                    <img src="{{ asset('storage/' . $user->picture) }}" alt="" class="manage-pic rounded">
                 </td>
                 <td>
                     {{$user->dob}}

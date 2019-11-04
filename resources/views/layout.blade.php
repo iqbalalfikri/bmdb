@@ -26,6 +26,8 @@
                 </li>
 
                 @if(Auth::check())
+
+                @if(auth()->user()->role_id == 1)
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Manage
@@ -36,12 +38,14 @@
                         <a class="dropdown-item text-white" href="manage-genre">Manage Genre</a>
                     </div>
                 </li>
+                @else
                 <li class="nav-item">
                     <a class="nav-link text-white font-weight-lighter" href="/saved-movie">Saved Movie</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white font-weight-lighter" href="inbox">Inbox</a>
                 </li>
+                @endif
                 @endif
             </ul>
             <ul class="navbar-nav mr-3 ml-3">
@@ -58,10 +62,15 @@
                 </li>
                 @else
                 <li class="nav-item my-2 my-lg-0">
-                    <a href="/profile" class="nav-link text-white">Profile</a>
+                    <a href="/profile" class="nav-link text-white">{{ auth()->user()->name }}</a>
                 </li>
                 <li class="nav-item my-2 my-lg-0">
-                    <a href="/logout" class="nav-link text-white">Logout</a>
+
+                    <a href="{{ route('logout') }}" class="nav-link text-white" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">Logout</a>
+                    <form id="logout-form" action=" {{ route('logout') }}" method="post">
+                        @csrf
+                    </form>
                 </li>
                 @endif
             </ul>
@@ -84,6 +93,7 @@
     <script src="js/app.js"></script>
 
 
+
     <script type="text/javascript">
         function showTime() {
             var date = new Date();
@@ -95,6 +105,10 @@
                 ('0' + date.getMinutes()).slice(-2) + ':' +
                 ('0' + date.getSeconds()).slice(-2);
         }
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).next('.custom-file-label').html(fileName);
+        });
 
         setInterval(showTime, 1000);
     </script>
