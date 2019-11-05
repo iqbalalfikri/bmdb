@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
-    <link rel="stylesheet" href="css/app.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 
 <body>
@@ -22,20 +22,20 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto ml-3">
                 <li class="nav-item">
-                    <a class="nav-link text-white font-weight-lighter" href="/">Home</a>
+                    <a class="nav-link text-white font-weight-lighter" href=" {{ route('home') }} ">Home</a>
                 </li>
 
                 @if(Auth::check())
 
                 @if(auth()->user()->role_id == 1)
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle text-white" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Manage
                     </a>
                     <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item text-white" href="manage-user">Manage User</a>
-                        <a class="dropdown-item text-white" href="manage-movie">Manage Movie</a>
-                        <a class="dropdown-item text-white" href="manage-genre">Manage Genre</a>
+                        <a class="dropdown-item text-white" href="{{ route('manage-user') }}">Manage User</a>
+                        <a class="dropdown-item text-white" href="{{ route('manage-movie') }}">Manage Movie</a>
+                        <a class="dropdown-item text-white" href="{{ route('manage-genre') }}">Manage Genre</a>
                     </div>
                 </li>
                 @else
@@ -55,14 +55,14 @@
                 </li>
                 @if(!Auth::check())
                 <li class="nav-item my-2 my-lg-0">
-                    <a href="/login" class="nav-link text-white">Login</a>
+                    <a href="{{ route('login') }}" class="nav-link text-white">Login</a>
                 </li>
                 <li class="nav-item my-2 my-lg-0">
-                    <a href="/register" class="nav-link text-white">Register</a>
+                    <a href="{{ route('register') }}" class="nav-link text-white">Register</a>
                 </li>
                 @else
                 <li class="nav-item my-2 my-lg-0">
-                    <a href="/profile" class="nav-link text-white">{{ auth()->user()->name }}</a>
+                    <a href="{{ route('profile', auth()->user()->id) }}" class="nav-link text-white">Profile</a>
                 </li>
                 <li class="nav-item my-2 my-lg-0">
 
@@ -83,14 +83,14 @@
     <footer class="page-footer font-small blue bg-dark">
 
         <div class="footer-copyright text-center py-3 text-white">© 2019 Copyright
-            <a href="/" class="text-warning font-weight-bold"> BMDb.com</a>
+            <a href="{{ route('home') }}" class="text-warning font-weight-bold"> BMDb.com</a>
         </div>
 
     </footer>
 
 
 
-    <script src="js/app.js"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 
 
 

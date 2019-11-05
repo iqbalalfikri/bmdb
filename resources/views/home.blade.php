@@ -15,14 +15,14 @@
     <div class="card mb-3 bg-transparent">
         <div class=" row no-gutters">
             <div class="col-md-4">
-                <a href="{{$movie->id}}">
+                <a href=" {{ route('movie', $movie->id) }} ">
                     <img class="picture m-2" src="{{$movie->picture}}" class="card-img" alt="...">
                 </a>
             </div>
             <div class="col-md-8">
                 <div class="card-body">
                     <div class="card-title">
-                        <a href="{{$movie->id}}" class="font-weight-bold title text-primary">{{$movie->title}}</a>
+                        <a href=" {{ route('movie', $movie->id) }} " class="font-weight-bold title text-primary">{{$movie->title}}</a>
                         @if(Auth::check())
                         <button class="btn btn-outline-dark float-right">Save</button>
                         @endif

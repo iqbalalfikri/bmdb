@@ -8,7 +8,7 @@
 <div class="container m-vh-80">
     <div class="mt-5"></div>
     <h2 class="font-weight-bold">Manage Movie</h2>
-    <a href="/add-movie" class="btn btn-primary mt-2 mb-2">Add Movie</a>
+    <a href="{{ route('add-movie') }}" class="btn btn-primary mt-2 mb-2">Add Movie</a>
     <table class="table table-bordered">
         <thead class="thead-dark">
             <tr>
@@ -33,13 +33,17 @@
                     <a href="" class="font-weight-bold text-primary">{{$movie->title}}</a>
                 </td>
                 <td>
-                    <img src="{{$movie->picture}}" alt="" class="manage-pic rounded">
+                    <img src="{{ asset('storage/' . $movie->picture) }}" alt="" class="manage-pic rounded">
                 </td>
                 <td style="width:400px">{{$movie->description}}</td>
                 <td>{{$movie->rating}}</td>
                 <td>
-                    <a href="/edit-movie" class="btn btn-warning">Edit</a>
-                    <a href="/delete-movie" class="btn btn-danger">Remove</a>
+                    <form action="{{ route('delete-movie', $movie->id) }}" method="post">
+                        @method('delete')
+                        @csrf
+                        <a href="{{ route('edit-movie', $movie->id) }}" class="btn btn-warning">Edit</a>
+                        <button type="submit" class="btn btn-danger">Remove</button>
+                    </form>
                 </td>
             </tr>
             @endforeach

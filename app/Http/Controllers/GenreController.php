@@ -26,7 +26,7 @@ class GenreController extends Controller
      */
     public function create()
     {
-        //
+        return view('add_genre');
     }
 
     /**
@@ -37,7 +37,15 @@ class GenreController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        $genre = new Genre();
+        $genre->name = $request->name;
+        $genre->save();
+
+        return redirect(route('manage-genre'))->with('status', 'Berhasil menambahkan genre !');
     }
 
     /**
@@ -59,7 +67,8 @@ class GenreController extends Controller
      */
     public function edit(Genre $genre)
     {
-        //
+        $genre = Genre::find($genre->id);
+        return view('edit_genre', compact('genre'));
     }
 
     /**
@@ -71,7 +80,13 @@ class GenreController extends Controller
      */
     public function update(Request $request, Genre $genre)
     {
-        //
+        $request->validate(['name' => 'required']);
+
+        Genre::where('id', $genre->id)->update([
+            'name' => $request->name
+        ]);
+
+        return redirect(route('manage-genre'))->with('status', 'Berhasil update genre !');
     }
 
     /**
@@ -82,6 +97,8 @@ class GenreController extends Controller
      */
     public function destroy(Genre $genre)
     {
-        //
+        Genre::find($genre->id)->delete();
+
+        return back()->with('status', 'Genre berhasil dihapuskan !');
     }
 }

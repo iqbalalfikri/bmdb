@@ -11,18 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
-
-Route::post('/', function () {
-    return view('home');
-});
+// Route::get('/profile', function () {
+//     return view('profile');
+// })->middleware('auth');
 
 
-Route::get('/profile', function () {
-    return view('profile');
-})->middleware('auth');
 
 Route::get('/edit-profile', function () {
     return view('edit_profile');
@@ -36,15 +29,32 @@ Route::get('/saved-movie', function () {
     return view('saved_movie');
 })->middleware(['auth', 'member']);
 
-Route::get('/manage-movie', 'MovieController@index')->middleware(['auth', 'admin']);
+Route::group(
+    ['prefix' => 'manage', 'middleware' => ['auth', 'admin']],
+    function () {
+        Route::get('/movie', 'MovieController@index')->name('manage-movie');
+        Route::get('/movie/add', 'MovieController@create')->name('add-movie');
+        Route::post('/movie', 'MovieController@store')->name('store-movie');
+        Route::get('/movie/{movie}/edit', 'MovieController@edit')->name('edit-movie');
+        Route::patch('/movie/{movie}', 'MovieController@update')->name('update-movie');
+        Route::delete('/movie/{movie}', 'MovieController@destroy')->name('delete-movie');
 
-Route::get('/manage-user', 'UserController@index')->middleware(['auth', 'admin']);
+        Route::get('/user', 'UserController@index')->name('manage-user');
+        Route::get('/user/add', 'UserController@create')->name('add-user');
+        Route::post('/user', 'UserController@store')->name('store-user');
+        Route::get('/user/{user}/edit', 'UserController@edit')->name('edit-user');
+        Route::patch('/user/{user}', 'UserController@update')->name('update-user');
+        Route::delete('/user/{user}', 'UserController@destroy')->name('delete-user');
 
-Route::get('/manage-genre', 'GenreController@index')->middleware(['auth', 'admin']);
+        Route::get('/genre', 'GenreController@index')->name('manage-genre');
+        Route::get('/genre/add', 'GenreController@create')->name('add-genre');
+        Route::post('/genre', 'GenreController@store')->name('store-genre');
+        Route::get('/genre/{genre}/edit', 'GenreController@edit')->name('edit-genre');
+        Route::patch('/genre/{genre}', 'GenreController@update')->name('update-genre');
+        Route::delete('/genre/{genre}', 'GenreController@destroy')->name('delete-genre');
+    }
+);
 
-Route::get('/add-user', function () {
-    return view('add_user');
-})->middleware(['auth', 'admin']);
 
 Route::get('/edit-user', function () {
     return view('edit_user');
@@ -81,5 +91,7 @@ Route::get('/delete-genre', function () {
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/profile/{user}', 'UserController@show')->middleware('auth')->name('profile');
 
-Route::get('/{movie}', 'MovieController@show');
+
+Route::get('/movie/{movie}', 'MovieController@show')->name('movie');

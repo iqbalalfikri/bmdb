@@ -9,6 +9,11 @@
     <form class="border rounded mt-5 p-4 bg-light" method="post" action="{{ route('login') }}">
         @csrf
         <h3 class="text-center font-weight-bold">Log In</h3>
+        @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+        @endif
         <div class="form-group text-center">
             <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Enter email">
         </div>

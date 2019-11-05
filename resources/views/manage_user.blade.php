@@ -9,7 +9,12 @@
 <div class="container m-vh-80">
     <div class="mt-5"></div>
     <h2 class="font-weight-bold">Manage User</h2>
-    <a href="/add-user" class="btn btn-primary mt-2 mb-2">Add User</a>
+    @if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+    @endif
+    <a href="{{ route('add-user') }}" class="btn btn-primary mt-2 mb-2">Add User</a>
     <table class="table table-bordered">
         <thead class="thead-dark">
             <tr>
@@ -47,8 +52,15 @@
                     {{$user->dob}}
                 </td>
                 <td>
-                    <a href="/edit-user" class="btn btn-warning">Edit</a>
-                    <a href="/delete-user" class="btn btn-danger">Remove</a>
+
+                    <form id="delete-user-form" action=" {{ route('delete-user', $user->id) }} " method="post">
+                        @method('delete')
+                        @csrf
+                        <a href="{{ route('edit-user', $user->id) }}" class="btn btn-warning">Edit</a>
+                        <button type="submit" class="btn btn-danger">Remove</button>
+                    </form>
+
+
                 </td>
             </tr>
             @endforeach
