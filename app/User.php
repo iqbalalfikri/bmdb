@@ -41,4 +41,12 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\roles', 'role_id');
     }
+
+    public function isLoggedIn()
+    {
+        if ($this->id == auth()->user()->id)
+            return true;
+
+        return false;
+    }
 }

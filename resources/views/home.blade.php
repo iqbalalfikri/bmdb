@@ -6,8 +6,8 @@
 
 
 <div class="container m-vh-80">
-    <form class="form-inline mt-5">
-        <input class="form-control mr-sm-2 my-2 bg-transparent col-4" type="search" placeholder="Search" aria-label="Search">
+    <form class="form-inline mt-5" method="get" action=" {{ route('search') }} ">
+        <input class="form-control mr-sm-2 my-2 bg-transparent col-4" id="q" name="q" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
 
@@ -16,7 +16,7 @@
         <div class=" row no-gutters">
             <div class="col-md-4">
                 <a href=" {{ route('movie', $movie->id) }} ">
-                    <img class="picture m-2" src="{{$movie->picture}}" class="card-img" alt="...">
+                    <img class="picture m-2" src="{{ asset('storage/' . $movie->picture) }}" class="card-img" alt="...">
                 </a>
             </div>
             <div class="col-md-8">
@@ -29,13 +29,15 @@
                     </div>
                     <p class="card-text text-muted">{{$movie->genres->name}}</p>
                     <p class="card-text">{{$movie->description}}</p>
-                    <img src="https://m.media-amazon.com/images/G/01/imdb/images/plugins/imdb_star_22x21-2889147855._CB483525256_.png" alt="">
+                    <img src="{{ asset('img/star.png') }}" alt="">
                     <span class="font-weight-bold rating">{{$movie->rating}}</span>
                 </div>
             </div>
         </div>
     </div>
     @endforeach
+
+    {{ $movies->links() }}
 
 </div>
 

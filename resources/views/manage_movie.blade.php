@@ -8,6 +8,11 @@
 <div class="container m-vh-80">
     <div class="mt-5"></div>
     <h2 class="font-weight-bold">Manage Movie</h2>
+    @if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+    @endif
     <a href="{{ route('add-movie') }}" class="btn btn-primary mt-2 mb-2">Add Movie</a>
     <table class="table table-bordered">
         <thead class="thead-dark">
@@ -24,9 +29,9 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($movies as $movie)
+            @foreach($movies as $key => $movie)
             <tr>
-                <th scope="row" style="text-align: center;">{{$loop->iteration}}</th>
+                <th scope="row" style="text-align: center;">{{$movies->firstItem() + $key}}</th>
                 <td>{{$movie->posted_by}}</td>
                 <td>{{$movie->genres->name}}</td>
                 <td style="width:100px">
@@ -49,5 +54,7 @@
             @endforeach
         </tbody>
     </table>
+
+    {{$movies->links()}}
 </div>
 @endsection

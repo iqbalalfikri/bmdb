@@ -55,42 +55,10 @@ Route::group(
     }
 );
 
-
-Route::get('/edit-user', function () {
-    return view('edit_user');
-})->middleware(['auth', 'admin']);
-
-Route::get('/delete-user', function () {
-    return view('delete_user');
-})->middleware(['auth', 'admin']);
-
-Route::get('/add-movie', function () {
-    return view('add_movie');
-})->middleware(['auth', 'admin']);
-
-Route::get('/edit-movie', function () {
-    return view('edit_movie');
-})->middleware(['auth', 'admin']);
-
-Route::get('/delete-movie', function () {
-    return view('delete-movie');
-})->middleware(['auth', 'admin']);
-
-Route::get('/add-genre', function () {
-    return view('add_genre');
-})->middleware(['auth', 'admin']);
-
-Route::get('/edit-genre', function () {
-    return view('edit_genre');
-})->middleware(['auth', 'admin']);
-
-Route::get('/delete-genre', function () {
-    return view('delete_genre');
-})->middleware(['auth', 'admin']);
-
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/search', 'HomeController@search')->name('search');
 Route::get('/profile/{user}', 'UserController@show')->middleware('auth')->name('profile');
 
 

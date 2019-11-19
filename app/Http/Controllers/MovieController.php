@@ -15,7 +15,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-        $movies = Movie::all();
+        $movies = Movie::paginate(10);
 
         return view('manage_movie')->with(compact('movies'));
     }
