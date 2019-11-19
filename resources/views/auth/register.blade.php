@@ -11,7 +11,7 @@
         <h3 class="text-center font-weight-bold">Register</h3>
 
         <div class="form-group text-center">
-            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Fullname">
+            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Fullname" value="{{ old('name') }}">
             @error('name')
             <span class="invalid-feedback text-left" role="alert">
                 <strong>{{ $message }}</strong>
@@ -21,7 +21,7 @@
 
 
         <div class="form-group text-center">
-            <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Email">
+            <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Email" value="{{ old('email') }}">
             @error('email')
             <span class="invalid-feedback text-left" role="alert">
                 <strong>{{ $message }}</strong>
@@ -46,7 +46,7 @@
 
 
         <div class="form-group">
-            <input type="radio" class="form-group" id="male" name="gender" value="Male">
+            <input type="radio" class="form-group" id="male" name="gender" value="Male" {{old('gender') == 'Male' ? 'checked' : ''}}>
             <label for="male" class="mr-3"> Male </label>
             <input type="radio" class="form-group" id="female" name="gender" value="Female">
             <label for="female"> Female </label>
@@ -61,7 +61,7 @@
 
 
         <div class="form-group text-center">
-            <textarea class="form-control @error('address') is-invalid @enderror" id="address" name="address" rows="2" placeholder="Address"></textarea>
+            <textarea class="form-control @error('address') is-invalid @enderror" id="address" name="address" rows="2" placeholder="Address"> {{ old('address') }} </textarea>
             @error('address')
             <span class="invalid-feedback text-left" role="alert">
                 <strong>{{ $message }}</strong>
@@ -71,7 +71,7 @@
 
 
         <div class="form-group text-center">
-            <input type="date" class="form-control text-secondary @error('dob') is-invalid @enderror" name="dob" id="dob">
+            <input type="date" class="form-control text-secondary @error('dob') is-invalid @enderror" name="dob" id="dob" value="{{ old('dob') }}">
             @error('dob')
             <span class="invalid-feedback text-left" role="alert">
                 <strong>{{ $message }}</strong>

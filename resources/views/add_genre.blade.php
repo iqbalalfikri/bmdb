@@ -10,7 +10,7 @@
         <h3 class="text-center font-weight-bold">Add Genre</h3>
 
         <div class="form-group text-center">
-            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Genre Name">
+            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Genre Name" value="{{ old('name') }}">
             @error('name')
             <span class="invalid-feedback text-left" role="alert">
                 <strong>{{ $message }}</strong>
