@@ -24,7 +24,22 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $movies = Movie::all();
+        $movies = Movie::paginate(10);
+
+        return view('home')->with(compact('movies'));
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('q');
+
+        $movies = Movie::where('title', 'like', "%$query%")
+            ->whereHas('genre_id', function ($query) {
+                $query->where('genre', '=', \Request::input('type'));
+            })
+            ->paginate(10);
+
+        $movies->appends($request->only('q'));
 
         return view('home')->with(compact('movies'));
     }

@@ -8,6 +8,13 @@
 <div class="container m-vh-80">
     <div class="mt-5"></div>
     <h2 class="font-weight-bold">Manage Genre</h2>
+
+
+    @if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+    @endif
     <a href="{{ route('add-genre') }}" class="btn btn-primary mt-2 mb-2">Add Genre</a>
     <table class="table table-bordered">
         <thead class="thead-dark">
@@ -18,9 +25,9 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($genres as $genre)
+            @foreach($genres as $key => $genre)
             <tr>
-                <td style="width:50px; text-align: center">{{$loop->iteration}}</td>
+                <td style="width:50px; text-align: center">{{$genres->firstItem() + $key}}</td>
                 <td>{{$genre->name}}</td>
                 <td style="width:200px">
                     <form action="{{ route('delete-genre', $genre->id) }}" method="post">
@@ -34,6 +41,8 @@
             @endforeach
         </tbody>
     </table>
+    {{ $genres->links() }}
 </div>
+
 
 @endsection

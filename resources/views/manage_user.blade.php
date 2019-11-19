@@ -31,9 +31,9 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($users as $user)
+            @foreach($users as $key => $user)
             <tr>
-                <th scope="row">{{$loop->iteration}}</th>
+                <th scope="row">{{$users->firstItem() + $key}}</th>
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
                 <td>
@@ -66,6 +66,9 @@
             @endforeach
         </tbody>
     </table>
+
+    {{ $users->links() }}
+
 </div>
 
 @endsection
