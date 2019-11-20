@@ -79,9 +79,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::where('id', $id)->firstOrFail();
-
-        return view('profile')->with(compact('user'));
+        $user = User::where('id', $id)->firstOrFail();;
+        return view('profile')->with(compact('user', 'id'));
     }
 
     /**

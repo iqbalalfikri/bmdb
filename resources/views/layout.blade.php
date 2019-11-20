@@ -43,7 +43,7 @@
                     <a class="nav-link text-white font-weight-lighter" href="/saved-movie">Saved Movie</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white font-weight-lighter" href="inbox">Inbox</a>
+                    <a class="nav-link text-white font-weight-lighter" href="{{ route('inbox') }}">Inbox</a>
                 </li>
                 @endif
                 @endif

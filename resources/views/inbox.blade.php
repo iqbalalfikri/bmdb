@@ -7,33 +7,21 @@
 <div class="container m-vh-80">
     <div class="mt-5"></div>
 
+    @foreach($inboxes as $inbox)
     <div class="media border rounded mt-1 p-4 bg-light">
-        <img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" class="mr-3 rounded profile-pic" alt="...">
+        <img src=" {{ asset('storage/' . $inbox->users->picture) }} " class="mr-3 rounded profile-pic" alt="...">
         <div class="media-body">
-            <a href="" class="mt-3 font-weight-bold title">Nama</a>
+            <a href="" class="mt-3 font-weight-bold title">{{ $inbox->users->name }}</a>
             <button class="btn btn-danger float-right">Remove</button>
             <div class="font-weight-bold">Posted at :
-                <span class="font-weight-normal">asdas</span>
+                <span class="font-weight-normal">{{ $inbox->created_at }}</span>
             </div>
             <div class="font-weight-bold mt-2">Message :
-                <span class="font-weight-normal">asdas</span>
+                <span class="font-weight-normal">{{ $inbox->message }}</span>
             </div>
         </div>
     </div>
-
-    <div class="media border rounded mt-1 p-4 bg-light">
-        <img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" class="mr-3 rounded profile-pic" alt="...">
-        <div class="media-body">
-            <a href="" class="mt-3 font-weight-bold title">Nama</a>
-            <button class="btn btn-danger float-right">Remove</button>
-            <div class="font-weight-bold">Posted at :
-                <span class="font-weight-normal">asdas</span>
-            </div>
-            <div class="font-weight-bold mt-2">Message :
-                <span class="font-weight-normal">asdas</span>
-            </div>
-        </div>
-    </div>
+    @endforeach
 
 </div>
 </div>

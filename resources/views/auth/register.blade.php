@@ -61,7 +61,7 @@
 
 
         <div class="form-group text-center">
-            <textarea class="form-control @error('address') is-invalid @enderror" id="address" name="address" rows="2" placeholder="Address"> {{ old('address') }} </textarea>
+            <textarea class="form-control @error('address') is-invalid @enderror" id="address" name="address" rows="2" placeholder="Address">{{ old('address') }}</textarea>
             @error('address')
             <span class="invalid-feedback text-left" role="alert">
                 <strong>{{ $message }}</strong>

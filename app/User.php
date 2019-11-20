@@ -37,12 +37,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
+
+    public function inboxes()
+    {
+        return $this->hasMany('App\Inbox');
+    }
     public function roles()
     {
         return $this->belongsTo('App\roles', 'role_id');
     }
 
-    public function isLoggedIn()
+    public function loggedInUser()
     {
         if ($this->id == auth()->user()->id)
             return true;

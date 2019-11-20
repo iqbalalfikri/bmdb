@@ -21,9 +21,7 @@ Route::get('/edit-profile', function () {
     return view('edit_profile');
 })->middleware('auth');
 
-Route::get('/inbox', function () {
-    return view('inbox');
-})->middleware(['auth', 'member']);
+Route::get('/inbox', 'InboxController@index')->middleware(['auth', 'member'])->name('inbox');
 
 Route::get('/saved-movie', function () {
     return view('saved_movie');
@@ -57,6 +55,8 @@ Route::group(
 
 Auth::routes();
 
+
+Route::put('/profile/{user}', 'InboxController@store')->middleware('auth')->name('send-message');
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/search', 'HomeController@search')->name('search');
 Route::get('/profile/{user}', 'UserController@show')->middleware('auth')->name('profile');

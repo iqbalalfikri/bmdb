@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\Genre;
 use App\Movie;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class MovieController extends Controller
     public function index()
     {
         $movies = Movie::paginate(10);
-
+        dd($movies);
         return view('manage_movie')->with(compact('movies'));
     }
 
@@ -74,8 +75,10 @@ class MovieController extends Controller
     public function show($id)
     {
         $movie = Movie::where('id', $id)->firstOrFail();
+        $comments = Comment::where('movie_id', $id)->get();
 
-        return view('detail')->with(compact('movie'));
+
+        return view('detail')->with(compact('movie', 'comments'));
     }
 
     /**
