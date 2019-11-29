@@ -2,6 +2,7 @@
 
 use App\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class UsersTableSeeder extends Seeder
 {
@@ -15,7 +16,7 @@ class UsersTableSeeder extends Seeder
         // User::create([
         //     'name' => 'Iqbal Alfikri',
         //     'email' => 'iqbal.alfikri@binus.ac.id',
-        //     'password' => bcrypt('iqbal'),
+        //     'password' => bcrypt('iqbal123'),
         //     'gender' => 'Male',
         //     'address' => 'Depok',
         //     'dob' => '1999-06-02',
@@ -26,7 +27,7 @@ class UsersTableSeeder extends Seeder
         // User::create([
         //     'name' => 'Hilmy Fadhila',
         //     'email' => 'hilmy.fadhila@binus.ac.id',
-        //     'password' => bcrypt('hilmy'),
+        //     'password' => bcrypt('hilmy123'),
         //     'gender' => 'Male',
         //     'address' => 'Bintaro',
         //     'dob' => '2000-02-03',
@@ -37,7 +38,7 @@ class UsersTableSeeder extends Seeder
         // User::create([
         //     'name' => 'Randy Khengdy',
         //     'email' => 'randy.khengdy@binus.ac.id',
-        //     'password' => bcrypt('randy'),
+        //     'password' => bcrypt('randy123'),
         //     'gender' => 'Male',
         //     'address' => 'Syahdan',
         //     'dob' => '2000-01-22',

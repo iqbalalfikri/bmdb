@@ -42,8 +42,8 @@
                 <td>
                     {{$user->gender}}
                 </td>
-                <td>
-                    {{$user->address}}
+                <td style="max-width: 400px;">
+                    {{ $user->address }}
                 </td>
                 <td>
                     <img src="{{ asset('storage/' . $user->picture) }}" alt="" class="manage-pic rounded">
@@ -51,7 +51,7 @@
                 <td>
                     {{$user->dob}}
                 </td>
-                <td>
+                <td style="width:160px">
 
                     <form id="delete-user-form" action=" {{ route('delete-user', $user->id) }} " method="post">
                         @method('delete')

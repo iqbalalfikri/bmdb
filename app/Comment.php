@@ -15,4 +15,13 @@ class Comment extends Model
     {
         return $this->belongsTo('App\User', 'user_id');
     }
+
+    public function commentUser()
+    {
+        if ($this->user_id == auth()->user()->id) {
+            return true;
+        }
+
+        return false;
+    }
 }

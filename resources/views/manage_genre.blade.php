@@ -29,7 +29,7 @@
             <tr>
                 <td style="width:50px; text-align: center">{{$genres->firstItem() + $key}}</td>
                 <td>{{$genre->name}}</td>
-                <td style="width:200px">
+                <td style="width:160px">
                     <form action="{{ route('delete-genre', $genre->id) }}" method="post">
                         @method('delete')
                         @csrf

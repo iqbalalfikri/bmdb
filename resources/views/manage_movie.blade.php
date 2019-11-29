@@ -42,7 +42,7 @@
                 </td>
                 <td style="width:400px">{{$movie->description}}</td>
                 <td>{{$movie->rating}}</td>
-                <td>
+                <td style="width:160px">
                     <form action="{{ route('delete-movie', $movie->id) }}" method="post">
                         @method('delete')
                         @csrf

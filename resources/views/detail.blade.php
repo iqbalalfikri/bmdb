@@ -24,7 +24,7 @@
                         </div>
                         <p class="card-text text-muted">{{$movie->genres->name}}</p>
                         <p class="card-text">{{$movie->description}}</p>
-                        <img src="https://m.media-amazon.com/images/G/01/imdb/images/plugins/imdb_star_22x21-2889147855._CB483525256_.png" alt="">
+                        <img src="{{ asset('img/star.png') }}" alt="">
                         <span class="font-weight-bold rating">{{$movie->rating}}</span>
                     </div>
                 </div>
@@ -34,14 +34,17 @@
         @foreach($comments as $comment)
         <div class="card bg-transparent m-4">
             <div class="media m-4">
-                <img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" class="mr-3 rounded-circle comment-picture" alt="...">
+                <img src="{{ asset('storage/' . $comment->users->picture) }}" class="mr-3 rounded-circle comment-picture" alt="...">
                 <div class="media-body">
-                    <a href="" class="font-weight-bold comment-name text-primary">{{ $comment->user_id }}</a>
+                    <a href="{{ route('profile', $comment->users->id) }}" class="font-weight-bold comment-name text-primary">{{ $comment->users->name }}</a>
+
+                    @if($comment->commentUser())
                     <button class="btn btn-danger float-right">Delete</button>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    @endif
+                    <p class="card-text"><small class="text-muted">Comment at {{ $comment->created_at }}</small></p>
                 </div>
             </div>
-            <p class="card-text mx-4 mb-3">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text mx-4 mb-3">{{ $comment->comment }}</p>
         </div>
         @endforeach
     </div>
