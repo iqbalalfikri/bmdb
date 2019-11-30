@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
         $this->call(InboxesTableSeeder::class);
         $this->call(CommentsTableSeeder::class);
+        $this->call(MovieUsersTableSeeder::class);
     }
 }

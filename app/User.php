@@ -51,6 +51,11 @@ class User extends Authenticatable
         return $this->belongsTo('App\roles', 'role_id');
     }
 
+    public function movies()
+    {
+        return $this->belongsToMany('App\Movies');
+    }
+
     public function loggedInUser()
     {
         if ($this->id == auth()->user()->id)

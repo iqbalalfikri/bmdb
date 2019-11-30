@@ -23,9 +23,7 @@ Route::get('/edit-profile', function () {
 
 Route::get('/inbox', 'InboxController@index')->middleware(['auth', 'member'])->name('inbox');
 
-Route::get('/saved-movie', function () {
-    return view('saved_movie');
-})->middleware(['auth', 'member']);
+Route::get('/saved-movie', 'MovieUserController@index')->middleware(['auth', 'member']);
 
 Route::group(
     ['prefix' => 'manage', 'middleware' => ['auth', 'admin']],
