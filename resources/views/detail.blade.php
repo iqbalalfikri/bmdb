@@ -50,9 +50,14 @@
     </div>
     <div class="border rounded bg-light">
         <div class="m-4">
-            <textarea class="form-control" id="comment" name="comment" placeholder="Comment..." rows="6"></textarea>
+            <form action="{{ route('store-comment') }}" method="post">
+                @csrf
+                <input type="hidden" name="movie_id" value="{{ $movie->id }}">
+                <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                <textarea class="form-control" id="comment" name="comment" placeholder="Comment..." rows="6"></textarea>
 
-            <button type="submit" class="btn btn-primary mt-3">Comment</button>
+                <button type="submit" class="btn btn-primary mt-3">Comment</button>
+            </form>
         </div>
     </div>
 

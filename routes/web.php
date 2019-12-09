@@ -61,3 +61,5 @@ Route::get('/profile/{user}', 'UserController@show')->middleware('auth')->name('
 
 
 Route::get('/movie/{movie}', 'MovieController@show')->name('movie');
+
+Route::post('/comment', 'CommentController@store')->name('store-comment')->middleware('auth');

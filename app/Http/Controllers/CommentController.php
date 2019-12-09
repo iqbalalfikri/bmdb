@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -34,7 +35,19 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'comment' => 'required'
+        ]);
+
+        $comment = new Comment();
+
+        $comment->user_id = $request->user_id;
+        $comment->movie_id = $request->movie_id;
+        $comment->comment = $request->comment;
+
+        $comment->save();
+
+        return back()->with('status', 'Komentar berhasil dibuat');
     }
 
     /**
@@ -44,9 +57,7 @@ class CommentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
-    }
+    { }
 
     /**
      * Show the form for editing the specified resource.
@@ -78,7 +89,5 @@ class CommentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
-    }
+    { }
 }
