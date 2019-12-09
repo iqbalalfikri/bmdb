@@ -14,7 +14,7 @@ class InboxController extends Controller
      */
     public function index()
     {
-        $inboxes = Inbox::where('receiver_id', auth()->user()->id)->get();
+        $inboxes = Inbox::where('receiver_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
 
 
         return view('inbox')->with(compact('inboxes'));
@@ -95,6 +95,8 @@ class InboxController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Inbox::find($id)->delete();
+
+        return back()->with('Pesan berhasil dihapus');
     }
 }

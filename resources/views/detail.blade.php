@@ -17,15 +17,31 @@
                 <div class="col-md-8">
                     <div class="card-body">
                         <div class="card-title">
-                            <a class="font-weight-bold title text-primary">{{$movie->title}}</a>
-                            @if(Auth::check())
-                            <button class="btn btn-warning float-right">Save</button>
+                            @if(Auth::check() && auth()->user()->role_id != 1)
+                            @if($movie->isSaved())
+                            <form action="{{ route('unsave', $movie->id) }}" method="post">
+                                <a href=" {{ route('movie', $movie->id) }} " class="font-weight-bold title text-primary">{{$movie->title}}</a>
+                                @csrf
+                                @method('delete')
+                                <input type="hidden" name="id" value="{{ $movie->id }}">
+                                <button type="submit" class="btn btn-warning float-right">Unsave</button>
+                            </form>
+                            @else
+                            <form action="{{ route('save') }}" method="post">
+                                @csrf
+                                <a href=" {{ route('movie', $movie->id) }} " class="font-weight-bold title text-primary">{{$movie->title}}</a>
+                                <input type="hidden" name="id" value="{{ $movie->id }}">
+                                <button type="submit" class="btn btn-outline-dark float-right">Save</button>
+                            </form>
+                            @endif
                             @endif
                         </div>
                         <p class="card-text text-muted">{{$movie->genres->name}}</p>
                         <p class="card-text">{{$movie->description}}</p>
-                        <img src="{{ asset('img/star.png') }}" alt="">
-                        <span class="font-weight-bold rating">{{$movie->rating}}</span>
+                        <div><img src="{{ asset('img/star.png') }}" alt="">
+                            <span class="font-weight-bold rating">{{$movie->rating}}</span>
+                        </div> <br>
+                        <div class="card-text">Posted at {{$movie->created_at}}</div>
                     </div>
                 </div>
             </div>
@@ -36,11 +52,15 @@
             <div class="media m-4">
                 <img src="{{ asset('storage/' . $comment->users->picture) }}" class="mr-3 rounded-circle comment-picture" alt="...">
                 <div class="media-body">
-                    <a href="{{ route('profile', $comment->users->id) }}" class="font-weight-bold comment-name text-primary">{{ $comment->users->name }}</a>
+                    <form action="{{ route('delete-comment', $comment->id) }}" method="post">
+                        @csrf
+                        @method('delete')
+                        <a href="{{ route('profile', $comment->users->id) }}" class="font-weight-bold comment-name text-primary">{{ $comment->users->name }}</a>
 
-                    @if($comment->commentUser())
-                    <button class="btn btn-danger float-right">Delete</button>
-                    @endif
+                        @if($comment->commentUser())
+                        <button class="btn btn-danger float-right">Delete</button>
+                        @endif
+                    </form>
                     <p class="card-text"><small class="text-muted">Comment at {{ $comment->created_at }}</small></p>
                 </div>
             </div>
@@ -48,6 +68,8 @@
         </div>
         @endforeach
     </div>
+
+    @if(Auth::check())
     <div class="border rounded bg-light">
         <div class="m-4">
             <form action="{{ route('store-comment') }}" method="post">
@@ -60,6 +82,7 @@
             </form>
         </div>
     </div>
+    @endif
 
 </div>
 

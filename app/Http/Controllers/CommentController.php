@@ -89,5 +89,9 @@ class CommentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    { }
+    {
+        Comment::find($id)->delete();
+
+        return back()->with('status', 'Komentar berhasil dihapus');
+    }
 }

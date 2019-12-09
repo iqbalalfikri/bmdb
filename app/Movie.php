@@ -20,4 +20,18 @@ class Movie extends Model
     {
         return $this->belongsToMany('App\User');
     }
+
+    public function isSaved()
+    {
+
+        $movies = MovieUser::where('movie_id', $this->id)->get();
+
+        foreach ($movies as $movie) {
+            if (auth()->user()->id == $movie->user_id) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

@@ -39,7 +39,12 @@ class MovieUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        MovieUser::create([
+            'movie_id' => $request->id,
+            'user_id' => auth()->user()->id
+        ]);
+
+        return back()->with('status', 'Berhasil disimpan');
     }
 
     /**
@@ -84,6 +89,9 @@ class MovieUserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        MovieUser::where('user_id', auth()->user()->id)
+            ->where('movie_id', $id)->delete();
+
+        return back()->with('status', 'Berhasil di-unsave');
     }
 }

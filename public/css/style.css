@@ -1,43 +1,50 @@
-.dropdown-menu > a:hover {
-	background-color: darkgrey;
+.dropdown-menu>a:hover {
+    background-color: darkgrey;
 }
 
 .picture {
-	width: 350px;
-	height: 250px;
+    width: 350px;
+    height: 250px;
 }
 
 .title {
-	font-size: 18pt;
+    font-size: 18pt;
 }
 
 .comment-picture {
-	width: 50px;
-	height: 50px;
+    width: 50px;
+    height: 50px;
 }
 
 .comment-name {
-	font-size: 14pt;
+    font-size: 14pt;
 }
 
 .rating {
-	font-size: 12pt;
+    font-size: 12pt;
 }
 
 .profile-pic {
-	width: 120px;
-	height: 120px;
+    width: 120px;
+    height: 120px;
 }
 
 .manage-pic {
-	width: 75px;
-	height: 75px;
+    width: 75px;
+    height: 75px;
 }
 
 .m-vh-80 {
-	min-height: 80vh;
+    min-height: 80vh;
 }
+
 .btn.btn-outline-dark:hover {
-	color: Black;
-	background: yellow;
+    color: Black;
+    background: yellow;
+}
+
+.btn.btn-warning:hover {
+    border-color: black;
+    background: transparent;
+
 }

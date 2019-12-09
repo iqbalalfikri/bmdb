@@ -18,9 +18,10 @@ class Comment extends Model
 
     public function commentUser()
     {
-        if ($this->user_id == auth()->user()->id) {
-            return true;
-        }
+        if (auth()->check())
+            if ($this->user_id == auth()->user()->id) {
+                return true;
+            }
 
         return false;
     }

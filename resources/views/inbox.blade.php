@@ -11,8 +11,12 @@
     <div class="media border rounded mt-1 p-4 bg-light">
         <img src=" {{ asset('storage/' . $inbox->users->picture) }} " class="mr-3 rounded profile-pic" alt="...">
         <div class="media-body">
-            <a href="" class="mt-3 font-weight-bold title">{{ $inbox->users->name }}</a>
-            <button class="btn btn-danger float-right">Remove</button>
+            <form action="{{ route('delete-message', $inbox->id) }}" method="post">
+                @csrf
+                @method('delete')
+                <a href="{{ route('profile', $inbox->sender_id) }}" class="mt-3 font-weight-bold title">{{ $inbox->users->name }}</a>
+                <button class="btn btn-danger float-right">Remove</button>
+            </form>
             <div class="font-weight-bold">Posted at :
                 <span class="font-weight-normal">{{ $inbox->created_at }}</span>
             </div>

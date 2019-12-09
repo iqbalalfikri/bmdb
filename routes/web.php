@@ -17,13 +17,9 @@
 
 
 
-Route::get('/edit-profile', function () {
-    return view('edit_profile');
-})->middleware('auth');
-
-Route::get('/inbox', 'InboxController@index')->middleware(['auth', 'member'])->name('inbox');
-
 Route::get('/saved-movie', 'MovieUserController@index')->middleware(['auth', 'member']);
+Route::post('', 'MovieUserController@store')->middleware(['auth', 'member'])->name('save');
+Route::delete('/{movie}', 'MovieUserController@destroy')->middleware(['auth', 'member'])->name('unsave');
 
 Route::group(
     ['prefix' => 'manage', 'middleware' => ['auth', 'admin']],
@@ -38,8 +34,6 @@ Route::group(
         Route::get('/user', 'UserController@index')->name('manage-user');
         Route::get('/user/add', 'UserController@create')->name('add-user');
         Route::post('/user', 'UserController@store')->name('store-user');
-        Route::get('/user/{user}/edit', 'UserController@edit')->name('edit-user');
-        Route::patch('/user/{user}', 'UserController@update')->name('update-user');
         Route::delete('/user/{user}', 'UserController@destroy')->name('delete-user');
 
         Route::get('/genre', 'GenreController@index')->name('manage-genre');
@@ -50,16 +44,21 @@ Route::group(
         Route::delete('/genre/{genre}', 'GenreController@destroy')->name('delete-genre');
     }
 );
+Route::get('/user/{user}/edit', 'UserController@edit')->name('edit-user')->middleware('edit-profile');
+Route::patch('/user/{user}', 'UserController@update')->name('update-user')->middleware('edit-profile');
 
 Auth::routes();
 
 
 Route::put('/profile/{user}', 'InboxController@store')->middleware('auth')->name('send-message');
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('/search', 'HomeController@search')->name('search');
+Route::delete('/profile/{user}', 'InboxController@destroy')->middleware('auth')->name('delete-message');
 Route::get('/profile/{user}', 'UserController@show')->middleware('auth')->name('profile');
-
-
-Route::get('/movie/{movie}', 'MovieController@show')->name('movie');
+Route::get('/inbox', 'InboxController@index')->middleware(['auth', 'member'])->name('inbox');
 
 Route::post('/comment', 'CommentController@store')->name('store-comment')->middleware('auth');
+Route::delete('/comment/{comment}', 'CommentController@destroy')->name('delete-comment')->middleware('auth');
+
+
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/search', 'HomeController@search')->name('search');
+Route::get('/movie/{movie}', 'MovieController@show')->name('movie');

@@ -7,8 +7,8 @@
 
 <div class="container m-vh-80">
     <form class="form-inline mt-5" method="get" action=" {{ route('search') }} ">
-        <input class="form-control mr-sm-2 my-2 bg-transparent col-4" id="q" name="q" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <input class="form-control mr-sm-2 my-2 bg-transparent col-4" id="q" name="q" placeholder="Search" value="{{ request('q') }}">
+        <button class="btn btn-dark" type="submit">Search</button>
     </form>
 
     @foreach($movies as $movie)
@@ -22,9 +22,27 @@
             <div class="col-md-8">
                 <div class="card-body">
                     <div class="card-title">
+
+                        @if(Auth::check() && auth()->user()->role_id != 1)
+                        @if($movie->isSaved())
+                        <form action="{{ route('unsave', $movie->id) }}" method="post">
+                            <a href=" {{ route('movie', $movie->id) }} " class="font-weight-bold title text-primary">{{$movie->title}}</a>
+                            @csrf
+                            @method('delete')
+                            <input type="hidden" name="id" value="{{ $movie->id }}">
+                            <button type="submit" class="btn btn-warning float-right">Unsave</button>
+                        </form>
+                        @else
+                        <form action="{{ route('save') }}" method="post">
+                            @csrf
+                            <a href=" {{ route('movie', $movie->id) }} " class="font-weight-bold title text-primary">{{$movie->title}}</a>
+
+                            <input type="hidden" name="id" value="{{ $movie->id }}">
+                            <button type="submit" class="btn btn-outline-dark float-right">Save</button>
+                        </form>
+                        @endif
+                        @else
                         <a href=" {{ route('movie', $movie->id) }} " class="font-weight-bold title text-primary">{{$movie->title}}</a>
-                        @if(Auth::check())
-                        <button class="btn btn-outline-dark float-right">Save</button>
                         @endif
                     </div>
                     <p class="card-text text-muted">{{$movie->genres->name}}</p>
@@ -37,7 +55,9 @@
     </div>
     @endforeach
 
-    {{ $movies->links() }}
+    <div class="text-center">
+        {{ $movies->links() }}
+    </div>
 
 </div>
 

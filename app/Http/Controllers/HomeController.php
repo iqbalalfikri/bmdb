@@ -22,9 +22,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
     public function index()
     {
-        $movies = Movie::paginate(10);
+        $movies = Movie::paginate(1);
 
         return view('home')->with(compact('movies'));
     }
@@ -33,13 +34,16 @@ class HomeController extends Controller
     {
         $query = $request->input('q');
 
+
         $movies = Movie::where('title', 'like', "%$query%")
-            ->whereHas('genre_id', function ($query) {
-                $query->where('genre', '=', \Request::input('type'));
+            ->orWhereHas('genres', function ($q) use ($query) {
+                $q->where('name', 'like', "%$query%");
             })
-            ->paginate(10);
+            ->paginate(1);
 
         $movies->appends($request->only('q'));
+
+
 
         return view('home')->with(compact('movies'));
     }

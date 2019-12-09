@@ -18,8 +18,13 @@
             <div class="col-md-8">
                 <div class="card-body">
                     <div class="card-title">
-                        <a href="" class="font-weight-bold title text-primary">{{$movie->movies->title}}</a>
-                        <button class="btn btn-warning float-right">Unsave</button>
+                        <form action="{{ route('unsave', $movie->movies->id) }}" method="post">
+                            <a href=" {{ route('movie', $movie->movies->id) }} " class="font-weight-bold title text-primary">{{$movie->movies->title}}</a>
+                            @csrf
+                            @method('delete')
+                            <input type="hidden" name="id" value="{{ $movie->id }}">
+                            <button type="submit" class="btn btn-warning float-right">Unsave</button>
+                        </form>
                     </div>
                     <p class="card-text"><small class="text-muted">{{$movie->movies->genre}}</small></p>
                     <p class="card-text">{{ $movie->movies->description }}</p>

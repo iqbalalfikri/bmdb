@@ -15,11 +15,9 @@
 
     <nav class="navbar navbar-expand navbar-light bg-dark">
         <a class="navbar-brand text-warning font-weight-bold ml-3" href="/">BMDb</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <div class="navbar-collapse">
             <ul class="navbar-nav mr-auto ml-3">
                 <li class="nav-item">
                     <a class="nav-link text-white font-weight-lighter" href=" {{ route('home') }} ">Home</a>
@@ -91,27 +89,7 @@
 
 
     <script src="{{ asset('js/app.js') }}"></script>
-
-
-
-    <script type="text/javascript">
-        function showTime() {
-            var date = new Date();
-            document.getElementById('time').innerHTML =
-                (date.getFullYear()) + '-' +
-                ('0' + (date.getMonth() + 1)).slice(-2) + '-' +
-                ('0' + date.getDate()).slice(-2) + ' ' +
-                ('0' + date.getHours()).slice(-2) + ':' +
-                ('0' + date.getMinutes()).slice(-2) + ':' +
-                ('0' + date.getSeconds()).slice(-2);
-        }
-        $(".custom-file-input").on("change", function() {
-            var fileName = $(this).val().split("\\").pop();
-            $(this).next('.custom-file-label').html(fileName);
-        });
-
-        setInterval(showTime, 1000);
-    </script>
+    <script src="{{ asset('js/script.js') }}"></script>
 </body>
 
 </html>

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class MovieUser extends Model
 {
+    protected $fillable = ['movie_id', 'user_id'];
     public function movies()
     {
         return $this->belongsTo('App\Movie', 'movie_id');
