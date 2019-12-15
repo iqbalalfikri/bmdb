@@ -50,7 +50,7 @@ class InboxController extends Controller
 
         $inbox->save();
 
-        return back();
+        return back()->with('status', 'Berhasil mengirimkan pesan');
     }
 
     /**

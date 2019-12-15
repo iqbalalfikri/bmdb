@@ -6,7 +6,13 @@
 
 
 <div class="container m-vh-80">
-    <form class="form-inline mt-5" method="get" action=" {{ route('search') }} ">
+    @if (session('status'))
+    <div class="alert alert-success mt-5">
+        {{ session('status') }}
+    </div>
+    @endif
+
+    <form class="form-inline mt-3" method="get" action=" {{ route('search') }} ">
         <input class="form-control mr-sm-2 my-2 bg-transparent col-4" id="q" name="q" placeholder="Search" value="{{ request('q') }}">
         <button class="btn btn-dark" type="submit">Search</button>
     </form>

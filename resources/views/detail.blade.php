@@ -8,6 +8,11 @@
 
 <div class="container m-vh-80">
 
+    @if (session('status'))
+    <div class="alert alert-success mt-5">
+        {{ session('status') }}
+    </div>
+    @endif
     <div class="border rounded mt-5">
         <div class="card bg-transparent m-4">
             <div class=" row no-gutters">
@@ -34,6 +39,9 @@
                                 <button type="submit" class="btn btn-outline-dark float-right">Save</button>
                             </form>
                             @endif
+                            @else
+                            <a href=" {{ route('movie', $movie->id) }} " class="font-weight-bold title text-primary">{{$movie->title}}</a>
+
                             @endif
                         </div>
                         <p class="card-text text-muted">{{$movie->genres->name}}</p>

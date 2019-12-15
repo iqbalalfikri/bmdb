@@ -5,6 +5,12 @@
 @section('content')
 
 <div class="container m-vh-80">
+
+    @if (session('status'))
+    <div class="alert alert-success mt-5">
+        {{ session('status') }}
+    </div>
+    @endif
     <div class="media border rounded mt-5 p-4">
         <img src="{{ asset('storage/' . $user->picture) }}" class="mr-3 rounded profile-pic" alt="...">
         <div class="media-body">

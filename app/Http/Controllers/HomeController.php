@@ -7,15 +7,6 @@ use App\Movie;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
 
     /**
      * Show the application dashboard.
@@ -25,7 +16,8 @@ class HomeController extends Controller
 
     public function index()
     {
-        $movies = Movie::paginate(1);
+        $movies = Movie::paginate(10);
+
 
         return view('home')->with(compact('movies'));
     }
@@ -39,7 +31,7 @@ class HomeController extends Controller
             ->orWhereHas('genres', function ($q) use ($query) {
                 $q->where('name', 'like', "%$query%");
             })
-            ->paginate(1);
+            ->paginate(10);
 
         $movies->appends($request->only('q'));
 
