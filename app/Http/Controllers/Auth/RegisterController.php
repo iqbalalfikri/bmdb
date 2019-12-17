@@ -49,6 +49,9 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        /**
+         * validasi input register user
+         */
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:100'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -69,12 +72,20 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
+        /**
+         * menyimpan gambar di folder storage/app/public/users
+         * dengan nama file yang digenerate menggunakan uniqid
+         */
 
         $filename = uniqid() . '.' . $data['upload']->getClientOriginalExtension();
         $data['upload']->move(storage_path('app\public'), $filename);
 
 
-
+        /**
+         * menyimpan data user yang telah divalidasi ke dalam database
+         * password di Hash, dan picture disimpan menggunakan
+         * nama file yang telah dibuat sebelumnya
+         */
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],

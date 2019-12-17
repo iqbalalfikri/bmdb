@@ -8,26 +8,6 @@ use Illuminate\Http\Request;
 class CommentController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -35,51 +15,27 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
+        /**
+         * validasi form untuk comment
+         * harus diisi
+         */
         $request->validate([
             'comment' => 'required'
         ]);
 
+        /**
+         * Menyimpan data comment dari user ke Database dengan menyimpan 
+         * user_id, movie_id, beserta comment yang di input oleh user
+         * lalu redirect ke halaman yang sama dengan pesan berhasil
+         */
         $comment = new Comment();
 
         $comment->user_id = $request->user_id;
         $comment->movie_id = $request->movie_id;
         $comment->comment = $request->comment;
-
         $comment->save();
 
         return back()->with('status', 'Komentar berhasil dibuat');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    { }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     /**
@@ -90,6 +46,10 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
+        /**
+         * Menghapus comment berdasarkan id yang ada di Database
+         * lalu redirect ke halaman yang sama dengan pesan berhasil
+         */
         Comment::find($id)->delete();
 
         return back()->with('status', 'Komentar berhasil dihapus');

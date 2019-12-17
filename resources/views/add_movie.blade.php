@@ -5,6 +5,9 @@
 @section('content')
 
 <div class="container w-50 m-vh-80">
+
+    {{-- form untuk menambahkan movie baru, diarahkan ke route('store-movie') dan memunculkan pesan error jika ada error --}}
+
     <form class="border rounded mt-5 p-4 bg-light" method="post" action=" {{ route('store-movie') }} " enctype="multipart/form-data">
         @csrf
         <h3 class="text-center font-weight-bold">Add Movie</h3>

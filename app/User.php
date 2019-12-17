@@ -37,25 +37,41 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * Menghubungkan tabel users dan tabel comments dengan relasi 1..*
+     */
     public function comments()
     {
         return $this->hasMany('App\Comment');
     }
 
+    /**
+     * Menghubungkan tabel users dan tabel inboxes dengan relasi 1..*
+     */
     public function inboxes()
     {
         return $this->hasMany('App\Inbox');
     }
+
+    /**
+     * Menghubungkan tabel roles dan tabel users dengan relasi 1..*
+     */
     public function roles()
     {
         return $this->belongsTo('App\roles', 'role_id');
     }
 
+    /**
+     * Menghubungkan tabel users dan tabel movies dengan relasi *..*
+     */
     public function movies()
     {
         return $this->belongsToMany('App\Movies');
     }
 
+    /**
+     * Mengecek apakah user ini adalah user yang sedang log in
+     */
     public function loggedInUser()
     {
         if ($this->id == auth()->user()->id)
@@ -64,6 +80,9 @@ class User extends Authenticatable
         return false;
     }
 
+    /**
+     * Mengecek apakah user yang sedang log in adalah admin
+     */
     public function isAdmin()
     {
         if ($this->role_id == 1)

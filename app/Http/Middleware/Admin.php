@@ -15,6 +15,11 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
+        /**
+         * Mengecek apakah user yang login adalah admin atau member
+         * admin = 1
+         * member = 2
+         */
         if (auth()->user()->role_id == 1)
             return $next($request);
 

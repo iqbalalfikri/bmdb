@@ -12,22 +12,29 @@
     </div>
     @endif
 
+    {{-- form untuk search movie by title or genre --}}
+
     <form class="form-inline mt-3" method="get" action=" {{ route('search') }} ">
         <input class="form-control mr-sm-2 my-2 bg-transparent col-4" id="q" name="q" placeholder="Search" value="{{ request('q') }}">
         <button class="btn btn-dark" type="submit">Search</button>
     </form>
+
+    {{-- Menampilakan data movie yang telah dikirim --}}
 
     @foreach($movies as $movie)
     <div class="card mb-3 bg-transparent">
         <div class=" row no-gutters">
             <div class="col-md-4">
                 <a href=" {{ route('movie', $movie->id) }} ">
-                    <img class="picture m-2" src="{{ asset('storage/' . $movie->picture) }}" class="card-img" alt="...">
+                    <img class="picture m-2" src="{{ asset('storage/movies/' . $movie->picture) }}" class="card-img" alt="...">
                 </a>
             </div>
             <div class="col-md-8">
                 <div class="card-body">
                     <div class="card-title">
+
+                        {{-- Mengecek apakah user sedang login dan role user adalah member dan movie tersebut sudah disimpan oleh user,
+                                lalu untuk memunculkan tombol Unsave --}}
 
                         @if(Auth::check() && auth()->user()->role_id != 1)
                         @if($movie->isSaved())
@@ -38,6 +45,10 @@
                             <input type="hidden" name="id" value="{{ $movie->id }}">
                             <button type="submit" class="btn btn-warning float-right">Unsave</button>
                         </form>
+
+                        {{-- Mengecek apakah user sedang login dan role user adalah member dan movie tersebut tidak disimpan oleh user,
+                                lalu untuk memunculkan tombol Save --}}
+
                         @else
                         <form action="{{ route('save') }}" method="post">
                             @csrf
@@ -60,6 +71,8 @@
         </div>
     </div>
     @endforeach
+
+    {{-- Menampilakn link untuk pagination --}}
 
     <div class="text-center">
         {{ $movies->links() }}

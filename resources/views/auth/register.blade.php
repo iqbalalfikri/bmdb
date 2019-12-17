@@ -6,6 +6,7 @@
 
 
 <div class="container w-50 m-vh-80">
+    {{-- form untuk register user, diarahkan ke route('register') dan memunculkan pesan error jika ada error --}}
     <form class="border rounded mt-5 p-4 bg-light" method="post" action="{{ route('register') }}" enctype="multipart/form-data">
         @csrf
         <h3 class="text-center font-weight-bold">Register</h3>

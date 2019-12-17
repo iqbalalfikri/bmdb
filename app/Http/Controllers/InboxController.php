@@ -14,20 +14,16 @@ class InboxController extends Controller
      */
     public function index()
     {
-        $inboxes = Inbox::where('receiver_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        /**
+         * Mengambil data 10 pesan per page yang diambil berdasarkan receiver_id
+         * yang didapat dari user id yang sedang log in
+         * diurutkan berdasarkan pesan dibuat dan secara descending
+         * lalu redirect ke halaman inbox dengan mengirimkan data tersebut
+         */
+        $inboxes = Inbox::where('receiver_id', auth()->user()->id)->orderBy('created_at', 'desc')->paginate(10);
 
 
         return view('inbox')->with(compact('inboxes'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -38,10 +34,20 @@ class InboxController extends Controller
      */
     public function store(Request $request)
     {
+
+        /**
+         * Validasi form untuk mengirim pesan
+         * harus diisi
+         */
         $request->validate([
             'message' => 'required'
         ]);
 
+        /**
+         * Menyimpan data pesan
+         * sender_id didapat dari user id yang sedang log in
+         * lalu redirect ke halaman yang sama dengan pesan berhasil
+         */
         $inbox = new Inbox();
 
         $inbox->sender_id = auth()->user()->id;
@@ -51,40 +57,6 @@ class InboxController extends Controller
         $inbox->save();
 
         return back()->with('status', 'Berhasil mengirimkan pesan');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     /**

@@ -5,11 +5,15 @@
 @section('content')
 
 <div class="container w-50 m-vh-80">
+
+    {{-- form untuk edit user, dan menampilkan pesan error jika ada error --}}
+
     <form class="border rounded mt-5 p-4 bg-light" method="post" action=" {{ route('update-user', $user->id) }} " enctype="multipart/form-data">
         @method('patch')
         @csrf
         <h3 class="text-center font-weight-bold">Edit User</h3>
 
+        <input type="hidden" name="previousUrl" value="{{ $previousUrl }}">
         <div class="form-group text-center">
             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Fullname" value="{{$user->name}}">
             @error('name')
@@ -29,6 +33,9 @@
 
         <div class="form-group">
             <select class="form-control @error('role') is-invalid @enderror" id="role" name="role">
+
+                {{-- menampilakn data role yang dikirim --}}
+
                 <option value="">--Choose Role--</option>
                 @foreach($roles as $role)
                 <option value="{{ $role->id }}" {{ $user->role_id == $role->id ? 'selected' : '' }}>{{ $role->name }}</option>

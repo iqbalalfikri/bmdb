@@ -29,6 +29,8 @@
             </tr>
         </thead>
         <tbody>
+
+            {{-- Menampilkan data movie yang telah dikirim --}}
             @foreach($movies as $key => $movie)
             <tr>
                 <th scope="row" style="text-align: center;">{{$movies->firstItem() + $key}}</th>
@@ -38,11 +40,13 @@
                     <a href="" class="font-weight-bold text-primary">{{$movie->title}}</a>
                 </td>
                 <td>
-                    <img src="{{ asset('storage/' . $movie->picture) }}" alt="" class="manage-pic rounded">
+                    <img src="{{ asset('storage/movies/' . $movie->picture) }}" alt="" class="manage-pic rounded">
                 </td>
                 <td style="width:400px">{{$movie->description}}</td>
                 <td>{{$movie->rating}}</td>
                 <td style="width:160px">
+
+                    {{-- Form untuk menghapus movie --}}
                     <form action="{{ route('delete-movie', $movie->id) }}" method="post">
                         @method('delete')
                         @csrf

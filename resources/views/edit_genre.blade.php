@@ -5,6 +5,7 @@
 @section('content')
 
 <div class="container w-50 m-vh-80">
+    {{-- form untuk edit genre dan menampilkan error jika ada error --}}
     <form class="border rounded mt-5 p-4 bg-light" method="post" action="{{ route('update-genre', $genre->id) }}">
         @method('patch')
         @csrf

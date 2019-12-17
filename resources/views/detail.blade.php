@@ -14,14 +14,24 @@
     </div>
     @endif
     <div class="border rounded mt-5">
+
+        {{-- Menampilkan detail movie yang telah dipilih user berdasarkan user id --}}
+
         <div class="card bg-transparent m-4">
             <div class=" row no-gutters">
                 <div class="col-md-4">
-                    <img class="picture m-2" src="{{ asset('storage/' . $movie->picture) }}" class="card-img" alt="...">
+
+                    {{-- Menampilkan gambar dari movie --}}
+
+                    <img class="picture m-2" src="{{ asset('storage/movies/' . $movie->picture) }}" class="card-img" alt="...">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
                         <div class="card-title">
+
+                            {{-- Mengecek apakah user sedang login dan role user adalah member dan movie tersebut sudah disimpan oleh user,
+                                lalu untuk memunculkan tombol Unsave --}}
+
                             @if(Auth::check() && auth()->user()->role_id != 1)
                             @if($movie->isSaved())
                             <form action="{{ route('unsave', $movie->id) }}" method="post">
@@ -31,6 +41,10 @@
                                 <input type="hidden" name="id" value="{{ $movie->id }}">
                                 <button type="submit" class="btn btn-warning float-right">Unsave</button>
                             </form>
+
+                            {{-- Mengecek apakah user sedang login dan role user adalah member dan movie tersebut tidak disimpan oleh user,
+                                lalu untuk memunculkan tombol Save --}}
+
                             @else
                             <form action="{{ route('save') }}" method="post">
                                 @csrf
@@ -39,11 +53,17 @@
                                 <button type="submit" class="btn btn-outline-dark float-right">Save</button>
                             </form>
                             @endif
+
+                            {{-- Mengecek jika user sedang tidak log in atau guest --}}
+
                             @else
                             <a href=" {{ route('movie', $movie->id) }} " class="font-weight-bold title text-primary">{{$movie->title}}</a>
 
                             @endif
                         </div>
+
+                        {{-- Menampilkan name, description, rating, dan posted_at dari movie --}}
+
                         <p class="card-text text-muted">{{$movie->genres->name}}</p>
                         <p class="card-text">{{$movie->description}}</p>
                         <div><img src="{{ asset('img/star.png') }}" alt="">
@@ -55,20 +75,30 @@
             </div>
         </div>
 
+
+        {{-- Menampilkan semua comment untuk movie yang ditampilkan --}}
+
         @foreach($comments as $comment)
         <div class="card bg-transparent m-4">
             <div class="media m-4">
                 <img src="{{ asset('storage/' . $comment->users->picture) }}" class="mr-3 rounded-circle comment-picture" alt="...">
                 <div class="media-body">
+
+                    {{-- form untuk delete comment --}}
+
                     <form action="{{ route('delete-comment', $comment->id) }}" method="post">
                         @csrf
                         @method('delete')
                         <a href="{{ route('profile', $comment->users->id) }}" class="font-weight-bold comment-name text-primary">{{ $comment->users->name }}</a>
 
+                        {{-- Mengecek apakah comment tersebut dibuat oleh user yang sedang log in untuk memunculkan tombol Delete --}}
+
                         @if($comment->commentUser())
                         <button class="btn btn-danger float-right">Delete</button>
                         @endif
                     </form>
+
+                    {{-- Menampilkan data dari comment --}}
                     <p class="card-text"><small class="text-muted">Comment at {{ $comment->created_at }}</small></p>
                 </div>
             </div>
@@ -77,9 +107,11 @@
         @endforeach
     </div>
 
+    {{-- Mengecek apakah user sedang log in atau tidak, jika iya maka munculkan form untuk comment --}}
     @if(Auth::check())
     <div class="border rounded bg-light">
         <div class="m-4">
+            {{-- Form untuk menuliskan comment --}}
             <form action="{{ route('store-comment') }}" method="post">
                 @csrf
                 <input type="hidden" name="movie_id" value="{{ $movie->id }}">

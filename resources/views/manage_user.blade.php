@@ -31,6 +31,9 @@
             </tr>
         </thead>
         <tbody>
+
+            {{-- Menampilakn data user yang telah dikirim --}}
+
             @foreach($users as $key => $user)
             <tr>
                 <th scope="row">{{$users->firstItem() + $key}}</th>
@@ -46,13 +49,14 @@
                     {{ $user->address }}
                 </td>
                 <td>
-                    <img src="{{ asset('storage/' . $user->picture) }}" alt="" class="manage-pic rounded">
+                    <img src="{{ asset('storage/users/' . $user->picture) }}" alt="" class="manage-pic rounded">
                 </td>
                 <td>
                     {{$user->dob}}
                 </td>
                 <td style="width:160px">
 
+                    {{-- Form untuk delete user --}}
                     <form id="delete-user-form" action=" {{ route('delete-user', $user->id) }} " method="post">
                         @method('delete')
                         @csrf

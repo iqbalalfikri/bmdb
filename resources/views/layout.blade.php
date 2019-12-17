@@ -1,3 +1,5 @@
+{{-- halaman master yang akan digunakan oleh semua page dengan keyword extends() --}}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,8 +25,10 @@
                     <a class="nav-link text-white font-weight-lighter" href=" {{ route('home') }} ">Home</a>
                 </li>
 
+                {{-- Mengecek apakah user sedang log in atau tidak --}}
                 @if(Auth::check())
 
+                {{-- Mengecek apakah user yang log in adalah admin --}}
                 @if(auth()->user()->role_id == 1)
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -76,6 +80,7 @@
         </div>
     </nav>
 
+    {{-- content yang akan diisi oleh halaman lain yang meng-extends halaman ini --}}
     @yield('content')
 
     <footer class="page-footer font-small blue bg-dark">

@@ -15,6 +15,9 @@ class Member
      */
     public function handle($request, Closure $next)
     {
+        /**
+         * Mengecek apakah user yang sedang login adalah member
+         */
         if (auth()->user()->role_id == 2)
             return $next($request);
 

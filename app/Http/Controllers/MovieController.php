@@ -16,6 +16,10 @@ class MovieController extends Controller
      */
     public function index()
     {
+        /**
+         * Mengambil 10 data movie per page
+         * Redirect ke halaman manage_movie dengan mengirimkan data tersebut
+         */
         $movies = Movie::paginate(10);
 
         return view('manage_movie')->with(compact('movies'));
@@ -28,6 +32,10 @@ class MovieController extends Controller
      */
     public function create()
     {
+        /**
+         * Mengambil data semua genre yang ada dari Database untuk digunakan di halaman add_movie
+         * redirect ke halaman add_movie dengan mengirimkan data tersebut
+         */
         $genres = Genre::all();
         return view('add_movie', compact('genres'));
     }
@@ -40,18 +48,34 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
+
+        /**
+         * Validasi form input
+         * semua form input harus diisi
+         * rating harus berupa angka dengan range 0 sampai 10
+         * upload harus memiliki ekstension .jpg atau .jpeg atau .png
+         */
         $request->validate([
             'title' => 'required',
             'genre' => 'required',
             'description' => 'required',
-            'rating' => 'numeric | min:0 | max:10',
+            'rating' => 'required | numeric | min:0 | max:10',
             'upload' => 'required | mimes:jpg,jpeg,png'
         ]);
 
+        /**
+         * Menyimpan data gambar (upload) ke folder storage/app/public/movies
+         * dengan nama file yang digenerate menggunakan uniqid
+         */
         $filename = uniqid() . '.' . $request->upload->getClientOriginalExtension();
-        $request->upload->move(storage_path('app\public'), $filename);
+        $request->upload->move(storage_path('app\public\movies'), $filename);
 
 
+        /**
+         * Menyimpan data movie yang telah di validasi ke Database
+         * field posted_by diambil dari nama admin yang sedang log in
+         * redirect ke halaman manage-movie dengan pesan berhasil
+         */
         $movie = new Movie();
 
         $movie->title = $request->title;
@@ -74,6 +98,11 @@ class MovieController extends Controller
      */
     public function show($id)
     {
+        /**
+         * Mengambil 1 data movie berdasarkan id
+         * Mengambil seluruh data comment berdasarkan movie_id
+         * redirect ke halaman detail dengan mengirimkan semua data tersebut
+         */
         $movie = Movie::where('id', $id)->firstOrFail();
         $comments = Comment::where('movie_id', $id)->get();
 
@@ -89,6 +118,11 @@ class MovieController extends Controller
      */
     public function edit(Movie $movie)
     {
+        /**
+         * Mengambil semua data genre
+         * Mengambil data movie berdasarkan id
+         * Redirect ke halaman edit movie dan mengirimkan semua data tersebut
+         */
         $genres = Genre::all();
         $movie = Movie::where('id', $movie->id)->firstOrFail();
         return view('edit_movie')->with(compact('genres', 'movie'));
@@ -103,17 +137,32 @@ class MovieController extends Controller
      */
     public function update(Request $request, Movie $movie)
     {
+
+        /**
+         * Validasi form input
+         * semua form data harus diisi
+         * rating harus berupa angka dengan range 0 sampai 10
+         * extension upload picture harus berupa jpg atau jpeg atau png
+         */
         $request->validate([
             'title' => 'required',
             'genre' => 'required',
             'description' => 'required',
-            'rating' => 'numeric | min:0 | max:10',
+            'rating' => 'required | numeric | min:0 | max:10',
             'upload' => 'required | mimes:jpg,jpeg,png'
         ]);
 
+        /**
+         * Menyimpan upload picture ke folder storage/app/public/movies
+         * dengan nama file yang digenerate menggunakan uniqid
+         */
         $filename = uniqid() . '.' . $request->upload->getClientOriginalExtension();
-        $request->upload->move(storage_path('app\public'), $filename);
+        $request->upload->move(storage_path('app\public\movies'), $filename);
 
+        /**
+         * Meng-update data movie berdasarkan id
+         * redirect ke halaman manage-movie dengan pesan berhasil
+         */
         Movie::where('id', $movie->id)->update([
             'title' => $request->title,
             'genre_id' => $request->genre,
@@ -133,6 +182,10 @@ class MovieController extends Controller
      */
     public function destroy(Movie $movie)
     {
+        /**
+         * Menghapus data movie berdasarkan id movie yang dipilih
+         * Redirect ke halaman yang sama dengan pesan berhasil
+         */
         Movie::find($movie->id)->delete();
 
         return back()->with('status', 'Movie berhasil dihapuskan !');

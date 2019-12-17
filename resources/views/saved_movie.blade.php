@@ -9,16 +9,19 @@
 
     <div class="mt-5"></div>
 
+    {{-- Menampilkan data movie yang telah disimpan oleh user yang sedang log in --}}
+
     @foreach($movies as $movie)
     <div class="card mb-3 bg-transparent">
         <div class=" row no-gutters">
             <div class="col-md-4">
-                <img class="picture m-2" src="{{ asset('storage/' . $movie->movies->picture ) }}" class="card-img" alt="...">
+                <img class="picture m-2" src="{{ asset('storage/movies/' . $movie->movies->picture ) }}" class="card-img" alt="...">
             </div>
             <div class="col-md-8">
                 <div class="card-body">
                     <div class="card-title">
                         <form action="{{ route('unsave', $movie->movies->id) }}" method="post">
+                            {{-- Form untuk menghilangkan movie yang disimpan --}}
                             <a href=" {{ route('movie', $movie->movies->id) }} " class="font-weight-bold title text-primary">{{$movie->movies->title}}</a>
                             @csrf
                             @method('delete')

@@ -25,11 +25,15 @@
             </tr>
         </thead>
         <tbody>
+            {{-- Menampilakn data genre yang telah dikirim --}}
             @foreach($genres as $key => $genre)
             <tr>
                 <td style="width:50px; text-align: center">{{$genres->firstItem() + $key}}</td>
                 <td>{{$genre->name}}</td>
                 <td style="width:160px">
+
+                    {{-- Form untuk menghapus genre --}}
+
                     <form action="{{ route('delete-genre', $genre->id) }}" method="post">
                         @method('delete')
                         @csrf

@@ -5,6 +5,9 @@
 @section('content')
 
 <div class="container w-50 m-vh-80">
+
+    {{-- Form untuk edit movie, dan menampilkan pesan error jika ada error --}}
+
     <form class="border rounded mt-5 p-4 bg-light" method="post" action="{{ route('update-movie', $movie->id) }}" enctype="multipart/form-data">
         @method('patch')
         @csrf
@@ -22,6 +25,9 @@
         <div class="form-group">
             <select class="form-control @error('genre') is-invalid @enderror" id="role" name="genre">
                 <option>--Choose Genre--</option>
+
+                {{-- Menampilakan semua data genre yang dikirim --}}
+
                 @foreach($genres as $genre)
                 <option value="{{$genre->id}}" {{ $movie->genre_id == $genre->id ? 'selected' : '' }}>{{$genre->name}}</option>
                 @endforeach
