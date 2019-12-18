@@ -34,7 +34,19 @@
             @foreach($movies as $key => $movie)
             <tr>
                 <th scope="row" style="text-align: center;">{{$movies->firstItem() + $key}}</th>
-                <td>{{$movie->posted_by}}</td>
+                <td>
+
+                    {{-- Mengecek apakah user yang mem-posting movie telah dihapus
+                        Jika tidak dihapus, tampilkan nama user
+                        Jika dihapus, tampilkan 'Admin (deleted user)'
+                     --}}
+
+                    @if(!$movie->deletedUser())
+                    {{$movie->user->name}}
+                    @else
+                    {{'Admin (deleted user)'}}
+                    @endif
+                </td>
                 <td>{{$movie->genres->name}}</td>
                 <td style="width:100px">
                     <a href="" class="font-weight-bold text-primary">{{$movie->title}}</a>

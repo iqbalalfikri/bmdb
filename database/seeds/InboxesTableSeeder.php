@@ -13,21 +13,27 @@ class InboxesTableSeeder extends Seeder
     public function run()
     {
         Inbox::create([
-            'sender_id' => 1,
+            'sender_id' => 3,
             'receiver_id' => 2,
-            'message' => 'Test 123'
+            'message' => 'Yo !'
+        ]);
+
+        Inbox::create([
+            'sender_id' => 3,
+            'receiver_id' => 2,
+            'message' => 'How is it going ?'
         ]);
 
         Inbox::create([
             'sender_id' => 1,
             'receiver_id' => 2,
-            'message' => 'Test 456'
+            'message' => "Yo ! How you doing ?"
         ]);
 
         Inbox::create([
-            'sender_id' => 2,
-            'receiver_id' => 1,
-            'message' => 'Test 321'
+            'sender_id' => 1,
+            'receiver_id' => 2,
+            'message' => "It's Good to see you man !"
         ]);
     }
 }

@@ -15,13 +15,13 @@ class CommentsTableSeeder extends Seeder
         Comment::create([
             'user_id' => 2,
             'movie_id' => 3,
-            'comment' => 'test comment'
+            'comment' => 'Great movie !'
         ]);
 
         Comment::create([
-            'user_id' => 2,
+            'user_id' => 3,
             'movie_id' => 3,
-            'comment' => 'test comment lagi'
+            'comment' => 'I love this movie !'
         ]);
     }
 }

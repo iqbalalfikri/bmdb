@@ -72,11 +72,11 @@ class UserController extends Controller
         ]);
 
         /**
-         * upload picture disimpan di folder storage/app/public/movies
+         * upload picture disimpan di folder storage/app/public/users
          * dengan nama file yang digenerate menggunakan uniqid
          */
         $filename = uniqid() . '.' . $request->upload->getClientOriginalExtension();
-        $request->upload->move(storage_path('app\public\movies'), $filename);
+        $request->upload->move(storage_path('app\public\users'), $filename);
 
 
         /**
@@ -176,16 +176,18 @@ class UserController extends Controller
 
 
         /**
-         * Menyimpan data user yang telah diinput ke dalam Database
-         * Redirect ke halaman manage-user dengan pesan berhasil
+         * upload picture disimpan di folder storage/app/public/users
+         * dengan nama file yang digenerate menggunakan uniqid
          */
 
+
         $filename = uniqid() . '.' . $request->upload->getClientOriginalExtension();
-        $request->upload->move(storage_path('app\public'), $filename);
+        $request->upload->move(storage_path('app\public\users'), $filename);
 
 
         /**
          * Update data user berdasarkan id ke Database
+         * Redirect ke halaman manage-user dengan pesan berhasil
          */
         User::where('id', $id)->update([
             'name' => $request->name,

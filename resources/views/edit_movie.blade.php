@@ -68,7 +68,7 @@
             </span>
             @enderror
         </div>
-        <button type="submit" class="btn btn-primary col-sm-12 mt-2">Submit</button>
+        <button type="submit" class="btn btn-primary col-sm-12 mt-2">Update Movie</button>
 
     </form>
 </div>

@@ -162,13 +162,15 @@ class MovieController extends Controller
         /**
          * Meng-update data movie berdasarkan id
          * redirect ke halaman manage-movie dengan pesan berhasil
+         * posted_by berubah sesuai dengan id admin yang merubahnya
          */
         Movie::where('id', $movie->id)->update([
             'title' => $request->title,
             'genre_id' => $request->genre,
             'description' => $request->description,
             'rating' => $request->rating,
-            'picture' => $filename
+            'picture' => $filename,
+            'posted_by' => auth()->user()->id
         ]);
 
         return redirect(route('manage-movie'))->with('status', 'Berhasil update movie !');

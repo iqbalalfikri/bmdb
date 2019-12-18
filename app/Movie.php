@@ -23,8 +23,17 @@ class Movie extends Model
     }
 
     /**
+     * Menghubungkan tabel movies dan tabel users dengan relasi 1..*
+     * digunakan untuk admin post movie
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'posted_by');
+    }
+    /**
      * Menghubungkan tabel movies dan tabel users dengan relasi *..*
      * yang dihubungkan dengan tabel movie_users
+     * digunakan untuk fitur save movie
      */
     public function users()
     {
@@ -44,6 +53,16 @@ class Movie extends Model
                 return true;
             }
         }
+
+        return false;
+    }
+
+    public function deletedUser()
+    {
+        $user = User::where('id', $this->posted_by)->first();
+
+        if ($user == null)
+            return true;
 
         return false;
     }

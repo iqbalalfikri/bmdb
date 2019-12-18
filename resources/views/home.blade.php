@@ -15,7 +15,7 @@
     {{-- form untuk search movie by title or genre --}}
 
     <form class="form-inline mt-3" method="get" action=" {{ route('search') }} ">
-        <input class="form-control mr-sm-2 my-2 bg-transparent col-4" id="q" name="q" placeholder="Search" value="{{ request('q') }}">
+        <input class="form-control mr-sm-2 my-2 bg-transparent col-4" id="q" name="q" placeholder="Search by Movie Title or Genre" value="{{ request('q') }}">
         <button class="btn btn-dark" type="submit">Search</button>
     </form>
 

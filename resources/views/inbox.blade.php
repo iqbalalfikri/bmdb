@@ -11,7 +11,7 @@
 
     @foreach($inboxes as $inbox)
     <div class="media border rounded mt-1 p-4 bg-light">
-        <img src=" {{ asset('storage/' . $inbox->users->picture) }} " class="mr-3 rounded profile-pic" alt="...">
+        <img src=" {{ asset('storage/users/' . $inbox->users->picture) }} " class="mr-3 rounded profile-pic" alt="...">
         <div class="media-body">
 
             {{-- Form untuk delete message --}}

@@ -81,7 +81,7 @@
         @foreach($comments as $comment)
         <div class="card bg-transparent m-4">
             <div class="media m-4">
-                <img src="{{ asset('storage/' . $comment->users->picture) }}" class="mr-3 rounded-circle comment-picture" alt="...">
+                <img src="{{ asset('storage/users/' . $comment->users->picture) }}" class="mr-3 rounded-circle comment-picture" alt="...">
                 <div class="media-body">
 
                     {{-- form untuk delete comment --}}
